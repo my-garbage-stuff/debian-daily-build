@@ -21,8 +21,8 @@ jobs:
           sudo mount --bind /sys chroot/sys
           sudo mount --bind /proc chroot/proc
           sudo mount --bind /run chroot/run
-          sudo chroot chroot apt install git -yq
-          sudo chroot chroot git clone https://github.com/uwuleng/build-test
+          sudo apt install git -yq
+          sudo git clone https://github.com/uwuleng/build-test chroot/build-test
           sudo chroot chroot bash /build-test/build.sh
           
           
