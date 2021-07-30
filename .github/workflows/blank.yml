@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: build
+        run: |
+          sudo apt update 
+          sudo apt install debootstrap
+          sudo debootstrap --no-merged-usr testing chroot
+          sudo mount --bind /dev chroot/dev
+          sudo mount --bind /sys chroot/sys
+          sudo mount --bind /proc chroot/proc
+          sudo mount --bind /run chroot/run
+          sudo chroot chroot apt install git -yq
+          sudo chroot chroot git clone https://github.com/uwuleng/build-test
+          sudo chroot chroot /build-test/build.sh
+          
+          
+          
