@@ -15,15 +15,15 @@ jobs:
       - name: build
         run: |
           sudo apt update 
-          sudo apt install debootstrap
+          sudo apt install debootstrap git -yq
           sudo debootstrap --no-merged-usr testing chroot
           sudo mount --bind /dev chroot/dev
           sudo mount --bind /sys chroot/sys
           sudo mount --bind /proc chroot/proc
           sudo mount --bind /run chroot/run
-          sudo apt install git -yq
-          sudo git clone https://github.com/uwuleng/build-test chroot/build-test
-          sudo chroot chroot bash /build-test/build.sh
+          sudo git clone https://github.com/uwuleng/build-test chroot/build
+          sudo mkdir chroot/output/
+          sudo chroot chroot bash /build/build.sh
 
       - uses: actions/upload-artifact@v2
         with:
