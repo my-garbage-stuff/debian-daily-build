@@ -24,6 +24,8 @@ jobs:
           sudo apt install git -yq
           sudo git clone https://github.com/uwuleng/build-test chroot/build-test
           sudo chroot chroot bash /build-test/build.sh
-          
-          
-          
+
+      - uses: actions/upload-artifact@v2
+        with:
+            name: output
+            path: chroot/output/*
