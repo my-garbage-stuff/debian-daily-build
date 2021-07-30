@@ -21,7 +21,7 @@ jobs:
           sudo mount --bind /sys chroot/sys
           sudo mount --bind /proc chroot/proc
           sudo mount --bind /run chroot/run
-          sudo git clone https://github.com/uwuleng/build-test chroot/build
+          sudo git clone $(git remote get-url origin) chroot/build
           sudo mkdir chroot/output/
           sudo chroot chroot bash /build/build.sh
 
